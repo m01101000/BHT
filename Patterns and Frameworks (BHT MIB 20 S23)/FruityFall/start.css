@@ -1,0 +1,16 @@
+.root {
+  -fx-background-color: #98D8AA;
+}
+/* Title bar */
+.title-bar {
+    -fx-background-color: blue;
+}
+
+.title-bar .window-close-button {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+}
+
+.title-bar .window-close-button:hover {
+    -fx-background-color: red;
+}
