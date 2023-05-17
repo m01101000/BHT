@@ -1,0 +1,82 @@
+---
+title: "5. R and Julia Excercise"
+author: "m01101000"
+output: html_document
+---
+
+<body style="background-color:cyan;">
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ______________________________________________________
+
+```{r}
+library(ggplot2)
+```
+
+## ______________________________________________________
+## a) import the data("iris")
+
+```{r}
+data("iris")
+```
+
+## ______________________________________________________
+## b) make a scatter plot with x-axis: Sepal.Length and y-axis: Sepal.Width, and the species should be shown in different colors
+
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  labs(x = "Sepal.Length", y = "Sepal.Width") +
+  theme_minimal()
+```
+
+## ______________________________________________________
+## c) add regression line for the previous plot with the whole dataset (regardless of the species)
+
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  labs(x = "Sepal.Length", y = "Sepal.Width") +
+  theme_minimal()
+```
+
+## ______________________________________________________
+## d) calculate the Pearson correlation for this plot
+
+```{r}
+cor(iris$Sepal.Length, iris$Sepal.Width)
+```
+
+## ______________________________________________________
+## e) make the boxplot for Petal.Width with 3 species separately in the x-axis in different colors
+
+```{r}
+ggplot(data = iris, aes(x = Species, y = Petal.Width, fill = Species)) +
+  geom_boxplot() +
+  labs(x = "Species", y = "Petal.Width") +
+  theme_minimal()
+```
+
+## ______________________________________________________
+## f) make the histogram for Petal.Width with 3 species separately in x-axis in different colors
+
+```{r}
+ggplot(data = iris, aes(x = Petal.Width, fill = Species)) +
+  geom_histogram(binwidth = 0.2, position = "identity", alpha = 0.7) +
+  labs(x = "Petal.Width", y = "Count") +
+  theme_minimal()
+```
+
+## ______________________________________________________
+## g) run the t-test of Petal.Width between setosa and virginica, and give the conclusion if the width is a statistically significant difference between 2 species
+
+```{r}
+setosa_width <- iris$Petal.Width[iris$Species == "setosa"]
+virginica_width <- iris$Petal.Width[iris$Species == "virginica"]
+t_test_result <- t.test(setosa_width, virginica_width)
+t_test_result
+```
